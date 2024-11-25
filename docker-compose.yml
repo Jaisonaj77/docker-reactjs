@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Specify the path to the Dockerfile
+    image: react-app:latest   # Image name
+    container_name: react-app-container  # Container name
+    ports:
+      - "3000:3000"  # Map port 3000 inside the container to port 3000 on the host
+    environment:
+      - NODE_ENV=production  # Optional environment variable for production
+    restart: always  # Ensure the container restarts automatically if it stops
+    networks:
+      - react-network
+
+networks:
+  react-network:
+    driver: bridge  # Use a bridge network for communication between containers
